@@ -2,7 +2,7 @@
 
 Name:		pgvector
 Version:	0.6.2
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Open-source vector similarity search for Postgres
 License:	PostgreSQL
 URL:		https://github.com/%{name}/%{name}/
@@ -20,7 +20,7 @@ inner product, and cosine distance
 %setup -q -n %{name}-%{version}
 
 %build
-%make_build %{?_smp_mflags}
+%make_build %{?_smp_mflags} OPTFLAGS=""
 
 %install
 %make_install
@@ -36,6 +36,10 @@ inner product, and cosine distance
 %{_datadir}/pgsql/extension/%{pname}*sql
 
 %changelog
+* Wed Mar 26 2025 Nikola Davidova <ndavidov@redhat.com> - 0.6.2-2
+- Enable Portable build
+- Resolves: RHEL-84405
+
 * Mon Mar 25 2024 Filip Janus <fjanus@redhat.com> - 0.6.2-1
 - Initial packaging
 
