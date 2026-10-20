@@ -1,8 +1,8 @@
 %global pname vector
 
 Name:		pgvector
-Version:	0.6.2
-Release:	2%{?dist}
+Version:	0.8.7
+Release:	1%{?dist}
 Summary:	Open-source vector similarity search for Postgres
 License:	PostgreSQL
 URL:		https://github.com/%{name}/%{name}/
@@ -25,8 +25,8 @@ inner product, and cosine distance
 %install
 %make_install
 
-#Remove header file, we don't need it right now:
-%{__rm} %{buildroot}/%{_includedir}/pgsql/server/extension/%{pname}/%{pname}.h
+#Remove header files, we don't need them right now:
+%{__rm} -r %{buildroot}/%{_includedir}/pgsql/server/extension/%{pname}
 
 %files
 %doc README.md
@@ -36,6 +36,11 @@ inner product, and cosine distance
 %{_datadir}/pgsql/extension/%{pname}*sql
 
 %changelog
+* Mon Oct 12 2026 Filip Janus <fjanus@redhat.com> - 0.8.7-1
+- Update to 0.8.7
+- Fixes CVE-2026-103484 (out-of-bounds write during IVFFlat index
+  build, which could lead to arbitrary code execution)
+
 * Wed Mar 26 2025 Nikola Davidova <ndavidov@redhat.com> - 0.6.2-2
 - Enable Portable build
 - Resolves: RHEL-84405
