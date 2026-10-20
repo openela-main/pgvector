@@ -1,7 +1,7 @@
 %global pname vector
 
 Name:		pgvector
-Version:	0.8.1
+Version:	0.8.7
 Release:	1%{?dist}
 Summary:	Open-source vector similarity search for Postgres
 License:	PostgreSQL
@@ -38,6 +38,11 @@ inner product, and cosine distance
 %{_datadir}/pgsql/extension/%{pname}*sql
 
 %changelog
+* Mon Oct 12 2026 Filip Janus <fjanus@redhat.com> - 0.8.7-1
+- Update to 0.8.7
+- Fixes CVE-2026-103484 (out-of-bounds write during IVFFlat index
+  build, which could lead to arbitrary code execution)
+
 * Tue Nov 18 2025 Filip Janus <fjanus@redhat.com> - 0.8.1-1
 - Update to 0.8.1
 - Initial import for postgresql18
