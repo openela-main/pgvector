@@ -2,7 +2,7 @@
 
 Name:		pgvector
 Version:	0.8.7
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Open-source vector similarity search for Postgres
 License:	PostgreSQL
 URL:		https://github.com/%{name}/%{name}/
@@ -36,10 +36,16 @@ inner product, and cosine distance
 %{_datadir}/pgsql/extension/%{pname}*sql
 
 %changelog
-* Mon Oct 12 2026 Filip Janus <fjanus@redhat.com> - 0.8.7-1
-- Update to 0.8.7
-- Fixes CVE-2026-103484 (out-of-bounds write during IVFFlat index
-  build, which could lead to arbitrary code execution)
+* Mon Oct 19 2026 Filip Janus <fjanus@redhat.com> - 0.8.7-2
+- Remove the whole extension header directory instead of a single
+  header file, since upstream 0.8.7 installs three headers
+  (vector.h, halfvec.h, sparsevec.h) instead of just vector.h, to
+  avoid an unpackaged-files build failure
+
+* Sun Oct 18 2026 RHEL Packaging Agent <redhat-ymir-agent@redhat.com> - 0.8.7-1
+- CVE-2026-103484 postgresql:16/pgvector: pgvector: Arbitrary code execution via out-of-bounds write during IVFFlat index build
+  execution via out-of-bounds write during IVFFlat index build
+- Resolves: RHEL-275341
 
 * Wed Mar 26 2025 Nikola Davidova <ndavidov@redhat.com> - 0.6.2-2
 - Enable Portable build
